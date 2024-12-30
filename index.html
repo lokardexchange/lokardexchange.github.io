@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokard Exchange</title>
+    <link rel="icon" href="lokardexchange.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #33ff33;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: glow-bg 5s infinite alternate;
+        }
+
+        @keyframes glow-bg {
+            0% { background-color: #0d0d0d; }
+            100% { background-color: #141414; }
+        }
+
+        h1 {
+            margin: 10px auto;
+            text-shadow: 0 0 10px #33ff33, 0 0 20px #33ff33;
+        }
+
+        p {
+            margin: 20px auto;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #33ff33;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            color: #ff3333;
+            text-shadow: 0 0 10px #ff3333;
+        }
+
+        button {
+            background-color: transparent;
+            border: 2px solid #33ff33;
+            color: #33ff33;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            background-color: #33ff33;
+            color: #0d0d0d;
+            box-shadow: 0 0 15px #33ff33;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        footer a {
+            font-size: 0.9rem;
+            color: #33ff33;
+        }
+
+        footer a:hover {
+            color: #ff3333;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            margin: 20px auto;
+            border: 1px solid #33ff33;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 15px #33ff33;
+        }
+
+        .terminal p {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to locarDXchange</h1>
+    <div class="terminal">
+        <p>
+            <strong>
+                This login page is protected by code and is only intended for authorized users.
+                If you are not authorized to access this page, do not attempt to input any codes or information.
+                Unauthorized access is strictly prohibited and violators will be subjected to legal action.
+                Please leave this page immediately if you are not authorized.
+            </strong>
+        </p>
+    </div>
+    <p>For authorized login, click the button below:</p>
+    <a href="https://lokardexchange.github.io/20241230/_entercode.htm"><button>Enter Code</button></a>
+    <footer>
+        <p>&#169;<a href="https://locardxchange.github.io/" target="_blank">dxmercado</a></p>
+    </footer>
+</body>
+</html>
