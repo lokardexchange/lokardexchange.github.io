@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Rules and Guidelines</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #0077ff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .rules {
+            padding: 20px;
+        }
+
+        .rule {
+            margin-bottom: 15px;
+        }
+
+        .rule button {
+            display: block;
+            width: 100%;
+            background: #0077ff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .rule button:hover {
+            background: #0056cc;
+        }
+
+        .rule-content {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-top: 5px;
+            border-radius: 4px;
+        }
+
+        .rule-content.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Class Rules and Guidelines</h1>
+        </div>
+        <div class="rules">
+            <div class="rule">
+                <button onclick="toggleContent(this)">Turn your devices off</button>
+                <div class="rule-content">NFC's are one of the concerns of Forensic. Unless you are expecting an emergency, please keep your phones inside your bag.</div>
+            </div>
+	    <div class="rule">
+                <button onclick="toggleContent(this)">Prepare for Online Meetings</button>
+                <div class="rule-content">During online meetings, your camera must be turned on, and a microphone should be connected and ready in case you are called for recitation, attendance, or other class interactions.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Respect Class Procedures</button>
+                <div class="rule-content">Raise your hand if you want to add or say something. You may eat or sleep as you like but do not disturb the class by making unnecessary noise.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Class Officer Roles</button>
+                <div class="rule-content">A CIA Director and deputy shall be elected once the classlist is finalized. They are responsible for forwarding class concerns to me, vice versa, and for keeping class in order.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Be Prepared</button>
+                <div class="rule-content">Bring a pen and a quarter of yellow paper. Expect a quiz every meeting.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Cheating Policy</button>
+                <div class="rule-content">Cheating will not be tolerated. If caught, I will crumple the culprit's paper and bring them to the disciplinary officer.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Safety and Evidence Integrity</button>
+                <div class="rule-content">Do not horse around. It is for our safety and for the preservation of the integrity of the evidence.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Review Prerequisites</button>
+                <div class="rule-content">While we will tackle some tools and methods, I will just review the needed foundation. Since we are also bound to follow the syllabus, we cannot learn it all.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Follow Instructions</button>
+                <div class="rule-content">When I say Restart, it is different from Shutdown and Start. We may also be performing investigations on volatile systems or transient pieces of evidence, where procedures should be followed in detail. Also be alert and be mindful of non-verbal signals.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Group Work</button>
+                <div class="rule-content">Group coherence and dynamics are every member's duty. Once grouped, please cooperate and participate. There will be a group evaluation.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Follow Standards</button>
+                <div class="rule-content">Follow standards in nomenclature, recording, and use of units.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Technology Use</button>
+                <div class="rule-content">Laptops and tablets may sometimes be allowed for class-related research, but not for unrelated activities. Mute all notifications.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Classroom Maintenance</button>
+                <div class="rule-content">Keep your workspace tidy and dispose of waste properly. Handle classroom equipment with care.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Health and Safety</button>
+                <div class="rule-content">Familiarize yourself with emergency procedures and adhere to safety protocols. Be mindful of health guidelines if applicable.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Continuous Improvement</button>
+                <div class="rule-content">Share constructive feedback with the instructor and stay curious by seeking additional resources to deepen your understanding.</div>
+            </div>
+            <div class="rule">
+                <button onclick="toggleContent(this)">Prepare Your Requirements</button>
+                <div class="rule-content">You should have a Discord account and an ID photo for Recitation Cards.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(button) {
+            const content = button.nextElementSibling;
+            content.classList.toggle('visible');
+        }
+    </script>
+</body>
+</html>

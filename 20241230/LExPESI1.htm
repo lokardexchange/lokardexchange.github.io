@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Safety Instructions</title>
+    <link rel="icon" href="locardexchange.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: #333;
+        }
+
+        h1 {
+            color: #2e3a59;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+
+        .instruction {
+            display: none;
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .instruction h3 {
+            color: #d32f2f;
+        }
+
+        .instruction ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .instruction li {
+            padding: 5px 0;
+        }
+
+        .instruction li::before {
+            content: "• ";
+            color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Emergency Safety Instructions</h1>
+
+    <div class="card">
+        <button onclick="toggleInstruction('earthquake')">Earthquake</button>
+        <div id="earthquake" class="instruction">
+            <h3>What to do during an Earthquake:</h3>
+            <ul>
+                <li>Drop to your hands and knees.</li>
+                <li>Cover your head and neck with your arms.</li>
+                <li>Take cover under a sturdy table or against an interior wall if possible.</li>
+                <li>Hold on until the shaking stops.</li>
+                <li>Avoid windows, heavy objects, or anything that may fall.</li>
+            </ul>
+        </div>
+
+        <button onclick="toggleInstruction('fire')">Fire</button>
+        <div id="fire" class="instruction">
+            <h3>What to do during a Fire:</h3>
+            <ul>
+                <li>Alert others and evacuate immediately.</li>
+                <li>Stay low to avoid smoke inhalation.</li>
+                <li>Use the nearest exit, not the elevator.</li>
+                <li>If clothing catches fire, stop, drop, and roll.</li>
+                <li>Call emergency services once safe.</li>
+            </ul>
+        </div>
+
+        <button onclick="toggleInstruction('terrorism')">Terrorism</button>
+        <div id="terrorism" class="instruction">
+            <h3>What to do during a Terrorism Threat:</h3>
+            <ul>
+                <li>Stay calm and listen for instructions from authorities.</li>
+                <li>Evacuate the building if possible, but avoid rushing to exits.</li>
+                <li>If you are trapped, find a safe place and stay quiet.</li>
+                <li>Keep a low profile and avoid windows or doors.</li>
+                <li>Call authorities when it is safe to do so.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleInstruction(instruction) {
+            var instructionDiv = document.getElementById(instruction);
+            if (instructionDiv.style.display === "none" || instructionDiv.style.display === "") {
+                instructionDiv.style.display = "block";
+            } else {
+                instructionDiv.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
