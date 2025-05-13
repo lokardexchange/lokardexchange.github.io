@@ -1,140 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Safety Instructions</title>
-    <link rel="icon" href="locardexchange.ico" type="image/x-icon">
-    <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safety Procedures and Instructions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2e003e, #5e2e90);
+      color: white;
+      padding: 30px;
+    }
 
-        h1 {
-            color: #2e3a59;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
 
-        .card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #dcb7ff;
+      text-shadow: 0 0 10px #c84bff, 0 0 20px #ae00ff;
+      margin-bottom: 40px;
+    }
 
-        .card button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 10px;
-            transition: background-color 0.3s ease;
-        }
+    .accordion {
+      background-color: #4b0073;
+      color: white;
+      cursor: pointer;
+      padding: 15px 20px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      transition: background-color 0.3s ease;
+      font-size: 1.1em;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
 
-        .card button:hover {
-            background-color: #45a049;
-        }
+    .accordion:hover {
+      background-color: #6f2da8;
+    }
 
-        .instruction {
-            display: none;
-            background-color: #f1f1f1;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            text-align: left;
-            font-size: 1.1rem;
-        }
+    .active, .accordion.active {
+      background-color: #822fbf;
+    }
 
-        .instruction h3 {
-            color: #d32f2f;
-        }
+    .panel {
+      padding: 0 20px;
+      background-color: #350040;
+      display: none;
+      overflow: hidden;
+      border-left: 4px solid #ae00ff;
+      border-radius: 0 0 8px 8px;
+      margin-bottom: 10px;
+    }
 
-        .instruction ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+    .panel p {
+      margin: 15px 0;
+    }
 
-        .instruction li {
-            padding: 5px 0;
-        }
+    ul {
+      padding-left: 20px;
+    }
 
-        .instruction li::before {
-            content: "• ";
-            color: #ff5722;
-        }
-    </style>
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Safety Procedures and Instructions</h1>
 
-    <h1>Emergency Safety Instructions</h1>
-
-    <div class="card">
-        <button onclick="toggleInstruction('earthquake')">Earthquake</button>
-        <div id="earthquake" class="instruction">
-            <h3>What to do during an Earthquake:</h3>
-            <ul>
-                <li>Drop to your hands and knees.</li>
-                <li>Cover your head and neck with your arms.</li>
-                <li>Take cover under a sturdy table or against an interior wall if possible.</li>
-                <li>Hold on until the shaking stops.</li>
-                <li>Avoid windows, heavy objects, or anything that may fall.</li>
-            </ul>
-        </div>
-
-        <button onclick="toggleInstruction('fire')">Fire</button>
-        <div id="fire" class="instruction">
-            <h3>What to do during a Fire:</h3>
-            <ul>
-                <li>Alert others and evacuate immediately.</li>
-                <li>Stay low to avoid smoke inhalation.</li>
-                <li>Use the nearest exit, not the elevator.</li>
-                <li>If clothing catches fire, stop, drop, and roll.</li>
-                <li>Call emergency services once safe.</li>
-            </ul>
-        </div>
-
-        <button onclick="toggleInstruction('terrorism')">Terrorism</button>
-        <div id="terrorism" class="instruction">
-            <h3>What to do during a Terrorism Threat:</h3>
-            <ul>
-                <li>Stay calm and listen for instructions from authorities.</li>
-                <li>Evacuate the building if possible, but avoid rushing to exits.</li>
-                <li>If you are trapped, find a safe place and stay quiet.</li>
-                <li>Keep a low profile and avoid windows or doors.</li>
-                <li>Call authorities when it is safe to do so.</li>
-            </ul>
-        </div>
+    <button class="accordion">⚠ Earthquake</button>
+    <div class="panel">
+      <p><strong>Immediate Actions:</strong></p>
+      <ul>
+        <li><strong>Drop, Cover, and Hold On</strong></li>
+        <li>Drop to the ground to avoid being knocked over.</li>
+        <li>Take cover under sturdy furniture or against an interior wall away from windows.</li>
+        <li>Hold on until shaking stops.</li>
+        <li><strong>Stay Indoors (if already inside):</strong> Do not run outside. Stay away from glass, hanging objects, or anything that may fall.</li>
+        <li><strong>If Outdoors:</strong> Move to an open area away from buildings, trees, poles, or wires. Stay low and protect your head.</li>
+        <li><strong>If in a Vehicle:</strong> Pull over to a safe location and remain inside.</li>
+      </ul>
+      <p><strong>Secondary Actions:</strong></p>
+      <ul>
+        <li>Conduct a headcount and check for injuries.</li>
+        <li>Be alert for aftershocks.</li>
+        <li>Do not use elevators.</li>
+        <li>Shut off utilities if trained and necessary.</li>
+      </ul>
+      <p><strong>Post-Incident Actions:</strong></p>
+      <ul>
+        <li>Evacuate if unsafe and go to the designated evacuation area.</li>
+        <li>Report injuries and damages to emergency responders.</li>
+        <li>Await official all-clear before re-entering.</li>
+        <li>Follow emergency management instructions.</li>
+      </ul>
     </div>
 
-    <script>
-        function toggleInstruction(instruction) {
-            var instructionDiv = document.getElementById(instruction);
-            if (instructionDiv.style.display === "none" || instructionDiv.style.display === "") {
-                instructionDiv.style.display = "block";
-            } else {
-                instructionDiv.style.display = "none";
-            }
-        }
-    </script>
+    <button class="accordion">🔥 Fire</button>
+    <div class="panel">
+      <p><strong>Immediate Actions:</strong></p>
+      <ul>
+        <li><strong>Raise the Alarm:</strong> Activate fire alarm and inform authorities.</li>
+        <li><strong>Evacuate Immediately:</strong> Use the nearest safe exit. Do not use elevators. Crawl if needed to avoid smoke.</li>
+        <li><strong>Close doors behind you</strong> to contain the fire.</li>
+        <li><strong>Check doors for heat:</strong> Use the back of your hand. If hot, do not open.</li>
+        <li><strong>Assist others:</strong> Help persons with disabilities or those needing aid.</li>
+      </ul>
+      <p><strong>Secondary Actions:</strong></p>
+      <ul>
+        <li>Conduct accountability check at evacuation site.</li>
+        <li>Do not re-enter the building unless cleared.</li>
+      </ul>
+      <p><strong>Post-Incident Actions:</strong></p>
+      <ul>
+        <li>Report trapped individuals or hazards to officials.</li>
+        <li>Give first aid if qualified.</li>
+        <li>Document the incident for reporting.</li>
+      </ul>
+    </div>
 
+    <button class="accordion">⚔ Terrorist Attack (Active Shooter, Bomb Threat)</button>
+    <div class="panel">
+      <p><strong>Immediate Actions:</strong></p>
+      <ul>
+        <li><strong>For Active Shooter:</strong></li>
+        <li><strong>Run:</strong> Evacuate if a safe path exists. Leave belongings.</li>
+        <li><strong>Hide:</strong> If evacuation isn’t safe, hide. Lock/barricade doors, silence phones.</li>
+        <li><strong>Fight:</strong> As last resort, prepare to defend yourself using available objects.</li>
+        <li><strong>For Bomb Threat:</strong> Do not touch suspicious objects. Alert authorities. Evacuate if told.</li>
+        <li><strong>For Explosions:</strong> Drop and cover your head and neck. Evacuate when safe.</li>
+      </ul>
+      <p><strong>Secondary Actions:</strong></p>
+      <ul>
+        <li>Contact security with clear info.</li>
+        <li>Assist in calm evacuation.</li>
+        <li>Give first aid if safe and trained.</li>
+      </ul>
+      <p><strong>Post-Incident Actions:</strong></p>
+      <ul>
+        <li>Fully cooperate with authorities.</li>
+        <li>Account for all personnel.</li>
+        <li>Preserve scene if asked for investigation.</li>
+        <li>Join debrief and review.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">✅ General Safety Principles</button>
+    <div class="panel">
+      <ul>
+        <li><strong>Stay calm and think clearly:</strong> Panic spreads, discipline saves lives.</li>
+        <li><strong>Know your exits:</strong> Always be aware of escape routes.</li>
+        <li><strong>Train regularly:</strong> Drills are essential for survival.</li>
+        <li><strong>Report hazards or suspicious activity immediately.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const acc = document.querySelectorAll(".accordion");
+    acc.forEach(btn => {
+      btn.addEventListener("click", function () {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
