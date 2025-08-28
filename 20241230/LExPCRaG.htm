@@ -14,16 +14,28 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 880px;
       margin: auto;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5em;
-      color: #dcb7ff;
-      text-shadow: 0 0 10px #c84bff, 0 0 20px #ae00ff;
-      margin-bottom: 40px;
+      font-size: 2.6em;
+      color: #e7c9ff;
+      text-shadow: 0 0 10px #c84bff, 0 0 22px #ae00ff, 0 0 36px rgba(174,0,255,.5);
+      margin-bottom: 32px;
+      letter-spacing: .5px;
+    }
+
+    .intro {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid #ae00ff;
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: .98rem;
+      line-height: 1.5;
     }
 
     .accordion {
@@ -35,9 +47,9 @@
       text-align: left;
       border: none;
       outline: none;
-      transition: background-color 0.3s ease;
-      font-size: 1.1em;
-      border-radius: 8px;
+      transition: background-color 0.25s ease, transform .05s ease;
+      font-size: 1.06em;
+      border-radius: 10px;
       margin-top: 10px;
     }
 
@@ -45,70 +57,194 @@
       background-color: #6f2da8;
     }
 
+    .accordion:active {
+      transform: translateY(1px);
+    }
+
     .active, .accordion.active {
       background-color: #822fbf;
     }
 
     .panel {
-      padding: 0 20px;
+      padding: 0 20px 6px 20px;
       background-color: #350040;
       display: none;
       overflow: hidden;
       border-left: 4px solid #ae00ff;
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 12px 12px;
       margin-bottom: 10px;
     }
 
-    .panel p {
-      margin: 15px 0;
+    .panel p, .panel li {
+      margin: 12px 0;
+      line-height: 1.55;
+    }
+
+    .panel ul {
+      padding-left: 20px;
+      margin: 10px 0 18px 0;
+    }
+
+    .fine {
+      font-size: .92rem;
+      opacity: .95;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Class Rules and Regulations</h1>
+    <div class="intro">
+      Maintain professionalism, safety, and integrity at all times. Policies below supplement institutional guidelines.
+    </div>
 
+    <!-- Alphabetized Sections -->
     <button class="accordion">Attention Protocol</button>
-    <div class="panel"><p>Stand at attention when I enter the room. You will also be instructed to stand at attention when a higher-ranking individual arrives. Upon the command “Attention!”, immediately stop what you are doing, face me, and listen.</p></div>
+    <div class="panel">
+      <p>Stand at attention when I enter the room. You will also be instructed to stand at attention when a higher-ranking individual arrives. Upon the command “Attention!”, immediately stop what you are doing, face forward, and listen.</p>
+    </div>
 
     <button class="accordion">Cheating</button>
-    <div class="panel"><p>Cheating is strictly prohibited. If caught, your paper will be confiscated, and you will be referred to the disciplinary officer.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Cheating is strictly prohibited. If caught, your paper will be confiscated and you will be referred to the disciplinary officer.</li>
+        <li><strong>Side-glancing during assessments is considered cheating.</strong></li>
+      </ul>
+    </div>
 
     <button class="accordion">Class Mayor</button>
-    <div class="panel"><p>A class mayor will be elected to maintain classroom order, relay concerns to the instructor, and ensure that the classroom is clean before dismissal. The class mayor will also be responsible for moderating the class social media page, posting announcements, and coordinating online communications as needed.</p></div>
+    <div class="panel">
+      <p>A class mayor will be elected to maintain order, relay concerns, and ensure the classroom is clean before dismissal.</p>
+      <p>The <strong>class mayor and deputy</strong> will also act as <strong>moderators of the class Facebook page</strong>.</p>
+    </div>
+
+    <button class="accordion">Deadlines & Extensions</button>
+    <div class="panel">
+      <ul>
+        <li><strong>No extension of deadlines</strong> unless extremely necessary and formally communicated.</li>
+        <li>Submit on or before the deadline; plan ahead for contingencies.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">Examinations & Materials</button>
+    <div class="panel">
+      <ul>
+        <li>Bring a <strong>black Pentel pen</strong> and a <strong>correction tape</strong> during exams.</li>
+        <li><strong>No borrowing of correction tape</strong> is allowed.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Excused Absences</button>
-    <div class="panel"><p>All excused absences must be supported with valid documentation and presented on the next class you attend. Acceptable excuses include illness (with a medical certificate) or the death of an immediate family member (with a copy of the death certificate).</p></div>
+    <div class="panel">
+      <ul>
+        <li>All excused absences must be supported with valid documentation and presented on the next class you attend.</li>
+        <li>Acceptable documents include a medical certificate (illness) or a copy of a death certificate (immediate family).</li>
+      </ul>
+    </div>
 
     <button class="accordion">Following Instructions</button>
-    <div class="panel"><p>Read and follow instructions thoroughly. Stay alert for both verbal and non-verbal cues from the instructor.</p></div>
+    <div class="panel">
+      <p>Read and follow instructions thoroughly. Stay alert to verbal and non-verbal cues from the instructor.</p>
+    </div>
 
     <button class="accordion">General Conduct</button>
-    <div class="panel"><p>Maintain a clean workspace. Properly dispose of waste. Follow all safety and emergency procedures, and observe health protocols when applicable.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Maintain a clean workspace and properly dispose of waste.</li>
+        <li>Observe safety and emergency procedures; follow health protocols when applicable.</li>
+        <li>Practice respectful communication and teamwork.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">Gifting Policy</button>
+    <div class="panel">
+      <p><strong>No Gifting:</strong> Students must not give material items to the teacher. Professional boundaries are to be maintained.</p>
+    </div>
 
     <button class="accordion">Grades</button>
-    <div class="panel"><p>You may visit during consultation hours to inquire about your grades. Requests for grade rectification will only be entertained before the final exam. Present relevant proof such as returned assignments, quizzes, or lab work.</p></div>
+    <div class="panel">
+      <ul>
+        <li>You may visit during consultation hours to inquire about your grades.</li>
+        <li>Requests for rectification will only be entertained <strong>before</strong> the final exam; bring supporting proof (returned outputs, quizzes, lab work).</li>
+        <li><strong>Incomplete (INC):</strong> Missing major requirements result in an INC grade. Even if you passed the course, failure to submit major requirements will keep your grade as INC until resolved per policy.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Group Work</button>
-    <div class="panel"><p>Group collaboration is a shared responsibility. Cooperate actively. Group performance will be evaluated.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Collaboration is a shared responsibility. Participate actively and equitably.</li>
+        <li>Group performance and individual contribution will be evaluated.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">Independent Study</button>
+    <div class="panel">
+      <p><strong>No Spoon-feeding:</strong> Supplement lectures with your own reading and research. Take initiative in exploring references and deepening understanding.</p>
+    </div>
+
+    <button class="accordion">Learning Mindset</button>
+    <div class="panel">
+      <p><strong>Focus on learning, not merely on grades.</strong> Engage with concepts, ask questions, and strive for mastery.</p>
+    </div>
 
     <button class="accordion">Laboratory Rules</button>
-    <div class="panel"><p>No horseplay. Handle instruments with care. Speak quietly. Always bring the required protective equipment and follow instructions diligently. Safety is a priority.</p></div>
+    <div class="panel">
+      <ul>
+        <li>No horseplay. Handle instruments with care; speak quietly.</li>
+        <li>Always bring required protective equipment and follow instructions diligently.</li>
+        <li>Safety is a priority—report hazards immediately.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Lecture Procedures (Face-to-Face)</button>
-    <div class="panel"><p>Expect an assessment during every meeting. Half the items will count as a quiz; the other half as recitation. Bring your recitation card, 0.25 sheet of yellow paper, and a black pen every session.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Expect a short assessment every meeting.</li>
+        <li>Half of the items count as a quiz; the other half as recitation.</li>
+        <li>Bring your recitation card, a 0.25 sheet of yellow paper, and a black pen every session.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">Missed Lessons & Completion Window</button>
+    <div class="panel">
+      <ul>
+        <li>It is the student’s responsibility to obtain missed lessons and announcements from classmates.</li>
+        <li>For missed assessments, <strong>completion expires after the next session you attend</strong>. Complete requirements promptly.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Online Class Guidelines</button>
-    <div class="panel"><p>You are required to turn on your camera and be ready to unmute when called. Join our Discord server during scheduled class time. If I do not arrive within 10 minutes, you may leave. Our online sessions are divided into three: (1) discussion/instructions, (2) activity, and (3) reading.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Turn on your camera and be ready to unmute when called.</li>
+        <li>Join our Discord server during scheduled class time.</li>
+        <li>If the instructor does not arrive within 10 minutes, you may leave.</li>
+        <li>Online sessions typically include: (1) discussion/instructions, (2) activity, and (3) reading.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Silence</button>
-    <div class="panel"><p>Maintain silence during class. Refrain from talking to classmates unless instructed. Communicate only with the instructor. Move quietly. Only involuntary sounds such as sneezing or coughing are excused.</p></div>
+    <div class="panel">
+      <p>Maintain silence during class. Refrain from talking to classmates unless instructed. Communicate primarily with the instructor. Move quietly. Only involuntary sounds (e.g., sneezing or coughing) are excused.</p>
+    </div>
 
     <button class="accordion">Standards and Formats</button>
-    <div class="panel"><p>Always follow the given format. Include your name and date on all submissions unless otherwise instructed.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Follow the required format for all submissions.</li>
+        <li>Include your name and date unless otherwise instructed.</li>
+      </ul>
+    </div>
 
     <button class="accordion">Use of Devices</button>
-    <div class="panel"><p>Put devices on silent mode. Smartphones are only allowed during emergencies or for verified course-related searches. You may verify class information online if needed.</p></div>
+    <div class="panel">
+      <ul>
+        <li>Put devices on silent mode.</li>
+        <li>Smartphones may be used only for emergencies or verified course-related searches.</li>
+        <li>You may verify class information online when appropriate.</li>
+      </ul>
+    </div>
   </div>
 
   <script>
@@ -117,11 +253,7 @@
       btn.addEventListener("click", function () {
         this.classList.toggle("active");
         const panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
       });
     });
   </script>
