@@ -1,122 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lokard Exchange</title>
-    <link rel="icon" href="lokardexchange.ico" type="image/x-icon">
+    <link rel="icon" href="lokardexchange.ico" type="image/x-icon" />
     <style>
+        :root {
+            --bg: #070707;
+            --panel: rgba(14, 8, 14, 0.9);
+            --panel-strong: rgba(0, 0, 0, 0.76);
+            --green: #ff2bd6;
+            --green-soft: rgba(255, 43, 214, 0.16);
+            --green-line: rgba(255, 43, 214, 0.42);
+            --red: #8dfcff;
+            --text-muted: #d6a9cf;
+            --white: #fff4fd;
+            --gold: #ffe27a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
         body {
-            background-color: #0d0d0d;
-            color: #33ff33;
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            animation: glow-bg 5s infinite alternate;
+            background:
+                radial-gradient(circle at 18% 14%, rgba(255, 43, 214, 0.16), transparent 28%),
+                radial-gradient(circle at 86% 82%, rgba(141, 252, 255, 0.1), transparent 32%),
+                linear-gradient(135deg, #050505 0%, #130812 56%, #111111 100%);
+            color: var(--green);
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: hidden;
+            animation: glow-bg 7s infinite alternate ease-in-out;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 20% 15%, rgba(51, 255, 51, 0.11), transparent 28%),
+                radial-gradient(circle at 85% 80%, rgba(255, 51, 51, 0.08), transparent 32%),
+                linear-gradient(135deg, #050505 0%, #0b0f0b 55%, #111111 100%);
+            color: var(--green);
+            font-family: "Courier New", Courier, monospace;
+            overflow-x: hidden;
+            animation: glow-bg 7s infinite alternate ease-in-out;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 43, 214, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 43, 214, 0.035) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
+            z-index: 0;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.025),
+                rgba(255, 255, 255, 0.025) 1px,
+                transparent 1px,
+                transparent 5px
+            );
+            mix-blend-mode: overlay;
+            opacity: 0.35;
+            z-index: 0;
         }
 
         @keyframes glow-bg {
-            0% { background-color: #0d0d0d; }
-            100% { background-color: #141414; }
+            0% { filter: brightness(0.95); }
+            100% { filter: brightness(1.08); }
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1200px, calc(100% - 28px));
+            height: 100vh;
+            margin: 0 auto;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            gap: 14px;
+            padding: 16px 0 12px;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 18px;
+            border: 1px solid var(--green-line);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 14px 18px;
+            box-shadow: 0 0 26px rgba(255, 43, 214, 0.16);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-block {
+            text-align: left;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 5px;
+            color: var(--text-muted);
+            font-size: 0.76rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--green);
+            box-shadow: 0 0 12px var(--green);
         }
 
         h1 {
-            margin: 10px auto;
-            text-shadow: 0 0 10px #33ff33, 0 0 20px #33ff33;
+            margin: 0;
+            font-size: clamp(1.85rem, 4.3vw, 3.7rem);
+            line-height: 0.95;
+            color: var(--white);
+            text-shadow: 0 0 10px var(--green), 0 0 24px rgba(51, 255, 51, 0.55);
+            letter-spacing: -1px;
         }
 
-        p {
-            margin: 20px auto;
-            font-size: 1.1rem;
-            line-height: 1.5;
+        .top-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-status,
+        .facebook-link {
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 43, 214, 0.34);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--green);
+            background: rgba(255, 43, 214, 0.08);
+            box-shadow: inset 0 0 18px rgba(255, 43, 214, 0.08), 0 0 14px rgba(255, 43, 214, 0.1);
+            font-size: 0.78rem;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .facebook-link {
+            color: var(--white);
+            border-color: rgba(141, 252, 255, 0.45);
+            background: rgba(141, 252, 255, 0.06);
+        }
+
+        .facebook-link:hover {
+            color: var(--red);
+            border-color: var(--red);
+            text-shadow: 0 0 10px var(--red);
+            box-shadow: 0 0 18px rgba(141, 252, 255, 0.28);
+        }
+
+        main {
+            min-height: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.65fr);
+            gap: 14px;
+            align-items: stretch;
+        }
+
+        .terminal-card,
+        .honors-card {
+            border: 1px solid var(--green-line);
+            border-radius: 26px;
+            background: var(--panel);
+            box-shadow:
+                0 0 25px rgba(255, 43, 214, 0.18),
+                inset 0 0 28px rgba(255, 43, 214, 0.04);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .terminal-card {
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-topbar,
+        .honors-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(255, 43, 214, 0.24);
+            background: var(--panel-strong);
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .window-dots span {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            border: 1px solid var(--green-line);
+            background: rgba(51, 255, 51, 0.15);
+            box-shadow: 0 0 9px rgba(51, 255, 51, 0.35);
+        }
+
+        .terminal-label,
+        .honors-label {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .terminal-body {
+            flex: 1;
+            min-height: 0;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 18px;
+            padding: clamp(20px, 4vw, 38px);
+            text-align: left;
+        }
+
+        .terminal-text {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: clamp(22px, 4vw, 34px);
+            border: 1px solid rgba(255, 43, 214, 0.35);
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(0, 0, 0, 0.72), rgba(255, 43, 214, 0.065)),
+                radial-gradient(circle at 90% 20%, rgba(141, 252, 255, 0.08), transparent 35%);
+            box-shadow: 0 0 20px rgba(255, 43, 214, 0.16);
+        }
+
+        .terminal-text::before {
+            content: "> AUTHORIZATION NOTICE";
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            color: var(--green);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(255, 43, 214, 0.7);
+        }
+
+        .terminal-text p {
+            margin: 30px 0 0;
+            color: var(--white);
+            font-size: clamp(0.94rem, 1.7vw, 1.1rem);
+            line-height: 1.58;
+        }
+
+        .login-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 43, 214, 0.36);
+            border-radius: 18px;
+            background:
+                linear-gradient(90deg, rgba(255, 43, 214, 0.09), rgba(141, 252, 255, 0.04));
+            box-shadow: inset 0 0 18px rgba(255, 43, 214, 0.04);
+        }
+
+        .login-block p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1rem;
         }
 
         a {
-            color: #33ff33;
+            color: var(--green);
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         a:hover {
-            color: #ff3333;
-            text-shadow: 0 0 10px #ff3333;
+            color: var(--red);
+            text-shadow: 0 0 10px var(--red);
         }
 
         button {
-            background-color: transparent;
-            border: 2px solid #33ff33;
-            color: #33ff33;
-            padding: 10px 30px;
-            font-size: 18px;
+            background: transparent;
+            border: 2px solid var(--green);
+            color: var(--green);
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.98rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.22s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
+            box-shadow: 0 0 18px rgba(51, 255, 51, 0.18);
         }
 
-        button:hover {
-            background-color: #33ff33;
-            color: #0d0d0d;
-            box-shadow: 0 0 15px #33ff33;
+        button:hover,
+        button:focus-visible {
+            background: var(--green);
+            color: var(--bg);
+            box-shadow: 0 0 22px var(--green), 0 0 46px rgba(255, 43, 214, 0.33);
+            transform: translateY(-2px);
+        }
+
+        .honors-card {
+            min-height: 520px;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+        }
+
+        .honors-intro {
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid rgba(255, 43, 214, 0.16);
+            background:
+                linear-gradient(135deg, rgba(255, 43, 214, 0.1), transparent 50%),
+                rgba(0, 0, 0, 0.25);
+        }
+
+        .honors-intro h2 {
+            margin: 0;
+            color: var(--white);
+            font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+            text-shadow: 0 0 12px rgba(51, 255, 51, 0.55);
+        }
+
+        .honors-count {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 9px;
+            padding: 5px 10px;
+            border: 1px solid rgba(255, 226, 122, 0.4);
+            border-radius: 999px;
+            color: var(--gold);
+            background: rgba(255, 226, 122, 0.08);
+            font-size: 0.75rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 16px rgba(255, 226, 122, 0.09);
+        }
+
+        .honors-scroll {
+            min-height: 0;
+            overflow-y: auto;
+            padding: 14px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--green) rgba(51, 255, 51, 0.08);
+        }
+
+        .honors-scroll::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        .honors-scroll::-webkit-scrollbar-track {
+            background: rgba(51, 255, 51, 0.08);
+            border-radius: 999px;
+        }
+
+        .honors-scroll::-webkit-scrollbar-thumb {
+            background: rgba(51, 255, 51, 0.55);
+            border-radius: 999px;
+            box-shadow: 0 0 10px rgba(51, 255, 51, 0.6);
+        }
+
+        .student-card {
+            position: relative;
+            margin-bottom: 10px;
+            padding: 13px 13px 13px 17px;
+            border: 1px solid rgba(255, 43, 214, 0.24);
+            border-radius: 16px;
+            background:
+                linear-gradient(135deg, rgba(0, 0, 0, 0.62), rgba(255, 43, 214, 0.06)),
+                radial-gradient(circle at 90% 15%, rgba(141, 252, 255, 0.08), transparent 36%);
+            text-align: left;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+        }
+
+        .student-card::before {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 0;
+            width: 4px;
+            height: calc(100% - 32px);
+            border-radius: 999px;
+            background: var(--green);
+            box-shadow: 0 0 12px var(--green);
+        }
+
+        .student-name {
+            margin: 0 0 6px;
+            color: var(--white);
+            font-size: 0.96rem;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .student-meta {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.42;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border: 1px solid rgba(255, 226, 122, 0.42);
+            border-radius: 999px;
+            color: var(--gold);
+            background: rgba(255, 226, 122, 0.08);
+            font-size: 0.68rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            font-size: 0.9rem;
-            color: #777;
+            text-align: center;
+            color: #9b7896;
+            font-size: 0.84rem;
+            padding: 0;
+        }
+
+        footer p {
+            margin: 0;
         }
 
         footer a {
             font-size: 0.9rem;
-            color: #33ff33;
         }
 
-        footer a:hover {
-            color: #ff3333;
+        @media (max-width: 900px) {
+            body {
+                overflow: auto;
+            }
+
+            .page-shell {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            header {
+                grid-template-columns: 1fr;
+                align-items: flex-start;
+            }
+
+            .top-actions {
+                justify-content: flex-start;
+            }
+
+            .header-status {
+                white-space: normal;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .terminal-card,
+            .honors-card {
+                min-height: auto;
+            }
+
+            .terminal-body {
+                padding: 22px;
+            }
+
+            .honors-scroll {
+                max-height: 330px;
+            }
         }
 
-        .terminal {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            margin: 20px auto;
-            border: 1px solid #33ff33;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 0 0 15px #33ff33;
-        }
+        @media (max-width: 520px) {
+            .page-shell {
+                width: min(100% - 20px, 1180px);
+                padding-top: 14px;
+            }
 
-        .terminal p {
-            text-align: left;
+            header,
+            .terminal-card,
+            .honors-card {
+                border-radius: 18px;
+            }
+
+            .terminal-text,
+            .login-block {
+                padding: 18px;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Dx Terminal</h1>
-    <div class="terminal">
-        <p>
-            <strong>
-                This login page is protected by code and is only intended for authorized users.
-                If you are not authorized to access this page, do not attempt to input any codes or information.
-                Unauthorized access is strictly prohibited and violators will be subjected to legal action.
-                Please leave this page immediately if you are not authorized.
-            </strong>
-        </p>
+    <div class="page-shell">
+        <header>
+            <div class="brand-block">
+                <h1>Welcome to Dx Terminal</h1>
+            </div>
+            <nav class="top-actions" aria-label="Primary links">
+                <a class="facebook-link" href="https://www.facebook.com/locardxchange" target="_blank" rel="noopener noreferrer">Facebook Page</a>
+                <span class="header-status">Authorized Users Only</span>
+            </nav>
+        </header>
+
+        <main>
+            <section class="terminal-card" aria-label="Authorization terminal">
+                <div class="terminal-topbar">
+                    <div class="window-dots" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                </div>
+
+                <div class="terminal-body">
+                    <div class="terminal-text">
+                        <p>
+                            <strong>
+                                This login page is protected by code and is only intended for authorized users.
+                                If you are not authorized to access this page, do not attempt to input any codes or information.
+                                Unauthorized access is strictly prohibited and violators will be subjected to legal action.
+                                Please leave this page immediately if you are not authorized.
+                            </strong>
+                        </p>
+                    </div>
+
+                    <div class="login-block">
+                        <p>For authorized login, click the button below:</p>
+                        <a href="20241230/x_entercode.htm"><button>Enter Code</button></a>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="honors-card" aria-label="Perfect exam achievers">
+                <div class="honors-topbar">
+                    <div class="window-dots" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                </div>
+
+                <div class="honors-intro">
+                    <h2>Perfect Exam Achievers</h2>
+                    <span class="honors-count">3 Recorded Perfect Scores</span>
+                </div>
+
+                <div class="honors-scroll">
+                    <article class="student-card">
+                        <h3 class="student-name">Locloc, Alyssa Mae Alumno</h3>
+                        <p class="student-meta">Program: Bachelor of Science in Criminology<br />Course: Tech 101: IT Application Tools in Criminal Justice and Public Safety<br />Exam: Final Exam<br />Date: 2025 August 9<br />Score: 50/50</p>
+                        <span class="badge">Perfect Score</span>
+                    </article>
+
+                    <article class="student-card">
+                        <h3 class="student-name">Urayan, Raina Jhean Corpuz</h3>
+                        <p class="student-meta">Program: Bachelor of Forensic Science<br />Course: Forensic 19: Digital Forensic II<br />Exam: Final Exam<br />Date: 2026 April 16<br />Score: 100/100</p>
+                        <span class="badge">Perfect Score</span>
+                    </article>
+
+                    <article class="student-card">
+                        <h3 class="student-name">Cago, Chantanya Nathalie Inclan</h3>
+                        <p class="student-meta">Program: Bachelor of Forensic Science<br />Course: CDI4F: Trace Evidence<br />Exam: Final Exam<br />Date: 2026 April 17<br />Score: 110/110</p>
+                        <span class="badge">Perfect Score</span>
+                    </article>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <p>Lokard Exchange</p>
+        </footer>
     </div>
-    <p>For authorized login, click the button below:</p>
-    <a href="20241230/x_entercode.htm"><button>Enter Code</button></a>
-    <footer>
-        <p><a href="https://www.facebook.com/locardxchange" target="_blank">Facebook Page</a></p>
-    </footer>
 </body>
 </html>
-
-
