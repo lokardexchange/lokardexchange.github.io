@@ -1,0 +1,606 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Safety Procedures</title>
+  <style>
+    :root {
+      --night: #090b1a;
+      --navy: #0f172a;
+      --blue: #1d4ed8;
+      --cyan: #22d3ee;
+      --orange: #fb923c;
+      --red: #ef4444;
+      --yellow: #fde047;
+      --green: #22c55e;
+      --white: #f8fafc;
+      --muted: #cbd5e1;
+      --glass: rgba(255, 255, 255, 0.11);
+      --glass-strong: rgba(255, 255, 255, 0.18);
+      --line: rgba(255, 255, 255, 0.18);
+      --shadow: 0 28px 70px rgba(0, 0, 0, 0.38);
+      --radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.32), transparent 28%),
+        radial-gradient(circle at 80% 4%, rgba(34, 211, 238, 0.28), transparent 30%),
+        radial-gradient(circle at 60% 90%, rgba(253, 224, 71, 0.18), transparent 26%),
+        linear-gradient(135deg, #090b1a 0%, #111827 48%, #172554 100%);
+      padding: 34px 18px;
+    }
+
+    .page {
+      width: min(1050px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      padding: 44px 34px;
+      margin-bottom: 22px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -80px auto auto -80px;
+      width: 250px;
+      height: 250px;
+      border-radius: 999px;
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -90px;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.18);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      background: rgba(253, 224, 71, 0.16);
+      color: #fef9c3;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+    }
+
+    .subtitle {
+      max-width: 800px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .safety-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .safety-card {
+      min-height: 120px;
+      border-radius: 22px;
+      padding: 20px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(15px);
+    }
+
+    .safety-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .safety-card p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.98rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+
+    .control-btn {
+      border: 0;
+      cursor: pointer;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: #111827;
+      font-weight: 900;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .control-btn.secondary {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--line);
+    }
+
+    .control-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 36px rgba(0, 0, 0, 0.32);
+    }
+
+    .accordion {
+      display: grid;
+      gap: 16px;
+    }
+
+    .accordion-item {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--glass);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(16px);
+    }
+
+    .accordion-item.earthquake {
+      border-left: 8px solid var(--orange);
+    }
+
+    .accordion-item.fire {
+      border-left: 8px solid var(--red);
+    }
+
+    .accordion-item.terror {
+      border-left: 8px solid var(--cyan);
+    }
+
+    .accordion-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border: 0;
+      background: transparent;
+      color: var(--white);
+      padding: 24px 26px;
+      cursor: pointer;
+      text-align: left;
+      font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .accordion-button:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .symbol {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      color: #0f172a;
+      background: var(--yellow);
+      font-size: 1.5rem;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .accordion-item.fire .symbol {
+      background: var(--red);
+      color: white;
+    }
+
+    .accordion-item.earthquake .symbol {
+      background: var(--orange);
+      color: white;
+    }
+
+    .accordion-item.terror .symbol {
+      background: var(--cyan);
+      color: #0f172a;
+    }
+
+    .plus {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 1.4rem;
+      transition: transform 0.28s ease, background 0.28s ease;
+    }
+
+    .accordion-item.active .plus {
+      transform: rotate(45deg);
+      background: rgba(253, 224, 71, 0.28);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.36s ease;
+    }
+
+    .panel-inner {
+      padding: 0 26px 28px 88px;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 2px;
+    }
+
+    .procedure-box {
+      border-radius: 20px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .procedure-box h3 {
+      margin-bottom: 10px;
+      color: #fef08a;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .procedure-box ul {
+      padding-left: 20px;
+    }
+
+    .procedure-box li {
+      margin: 8px 0;
+      color: #f8fafc;
+      line-height: 1.65;
+    }
+
+    .reminder {
+      margin-top: 16px;
+      border-radius: 22px;
+      padding: 22px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(34, 211, 238, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+    }
+
+    .reminder h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .reminder ul {
+      padding-left: 22px;
+      color: var(--white);
+      line-height: 1.75;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 22px 12px;
+      }
+
+      .hero {
+        padding: 34px 20px;
+      }
+
+      .safety-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .accordion-button {
+        padding: 22px 18px;
+      }
+
+      .symbol {
+        width: 42px;
+        height: 42px;
+      }
+
+      .panel-inner {
+        padding: 0 18px 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="badge">Emergency Readiness</div>
+        <h1>Emergency Safety Procedures</h1>
+        <p class="subtitle">Earthquake, Fire, and Terrorist Attack procedures for classroom, laboratory, campus, and field-training contexts.</p>
+      </div>
+    </section>
+
+    <section class="safety-strip">
+      <div class="safety-card">
+        <strong>Stay Alert</strong>
+        <p>Recognize danger early, listen for instructions, and avoid panic-driven movement.</p>
+      </div>
+      <div class="safety-card">
+        <strong>Act Fast</strong>
+        <p>Use the safest available action based on the actual threat, location, and exit access.</p>
+      </div>
+      <div class="safety-card">
+        <strong>Report Clearly</strong>
+        <p>Give concise information to authorities: what happened, where it happened, and who needs help.</p>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Accordion controls">
+      <button class="control-btn" id="expandAll">Expand All</button>
+      <button class="control-btn secondary" id="collapseAll">Collapse All</button>
+    </section>
+
+    <section class="accordion" id="safetyAccordion">
+      <article class="accordion-item earthquake">
+        <button class="accordion-button" aria-expanded="false">
+          <span class="title-wrap"><span class="symbol">⌁</span> Earthquake</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="section-grid">
+              <div class="procedure-box">
+                <h3>Before an Earthquake</h3>
+                <ul>
+                  <li>Know the evacuation routes, open-area assembly points, and emergency exits of the room, building, or laboratory.</li>
+                  <li>Identify safe cover points such as sturdy tables, desks, or interior walls away from glass, shelves, and unsecured objects.</li>
+                  <li>Keep aisles, exits, and laboratory pathways clear at all times.</li>
+                  <li>Secure heavy equipment, cabinets, chemicals, glassware, and materials that may fall or spill during shaking.</li>
+                  <li>Prepare a small emergency kit with water, flashlight, whistle, basic first aid supplies, identification, and essential medication.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>During an Earthquake</h3>
+                <ul>
+                  <li>Drop to your hands and knees immediately.</li>
+                  <li>Cover your head and neck. Take cover under a sturdy table or desk when available.</li>
+                  <li>Hold on until the shaking stops. If the cover moves, move with it while staying protected.</li>
+                  <li>Stay away from windows, glass panels, shelves, cabinets, hanging objects, and unstable equipment.</li>
+                  <li>Do not run outside while the ground is shaking.</li>
+                  <li>If outdoors, move to an open area away from buildings, trees, utility poles, walls, and power lines.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>After an Earthquake</h3>
+                <ul>
+                  <li>Check yourself and nearby classmates for injuries before moving.</li>
+                  <li>Evacuate calmly when instructed or when it is safe to do so.</li>
+                  <li>Use stairs. Do not use elevators.</li>
+                  <li>Proceed to the designated assembly area and wait for roll call or accountability checks.</li>
+                  <li>Expect aftershocks and be ready to Drop, Cover, and Hold On again.</li>
+                  <li>Report injuries, trapped persons, fire, gas smell, chemical spills, electrical hazards, and structural damage immediately.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="accordion-item fire">
+        <button class="accordion-button" aria-expanded="false">
+          <span class="title-wrap"><span class="symbol">▲</span> Fire</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="section-grid">
+              <div class="procedure-box">
+                <h3>Before a Fire</h3>
+                <ul>
+                  <li>Know at least two exit routes from the room, laboratory, building, or activity area.</li>
+                  <li>Know the location of fire alarms, fire extinguishers, emergency exits, and assembly areas.</li>
+                  <li>Keep exits, corridors, stairways, and laboratory pathways clear.</li>
+                  <li>Do not overload outlets or misuse electrical equipment.</li>
+                  <li>Handle flammable materials, chemicals, burners, and electrical devices only as instructed.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>During a Fire</h3>
+                <ul>
+                  <li>Alert others immediately and activate the alarm if safe and appropriate.</li>
+                  <li>Evacuate using the nearest safe exit. Do not collect unnecessary belongings.</li>
+                  <li>Stay low when moving through smoke because cleaner air is usually closer to the floor.</li>
+                  <li>Before opening a door, check for heat using the back of your hand. Do not open a hot door.</li>
+                  <li>Close doors behind you to slow the spread of fire and smoke.</li>
+                  <li>Use stairs. Do not use elevators.</li>
+                  <li>If clothing catches fire, stop, drop, and roll.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>After a Fire</h3>
+                <ul>
+                  <li>Proceed to the designated assembly area and wait for accountability checks.</li>
+                  <li>Do not re-enter the building until authorized by emergency personnel or school authorities.</li>
+                  <li>Report missing persons, injuries, trapped individuals, smoke exposure, and possible hazards.</li>
+                  <li>Avoid touching burned materials, damaged electrical equipment, chemicals, debris, or structural components.</li>
+                  <li>Cooperate with emergency responders and provide accurate information when asked.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="accordion-item terror">
+        <button class="accordion-button" aria-expanded="false">
+          <span class="title-wrap"><span class="symbol">!</span> Terrorist Attack</span>
+          <span class="plus">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="section-grid">
+              <div class="procedure-box">
+                <h3>Before a Terrorist Attack</h3>
+                <ul>
+                  <li>Maintain situational awareness in classrooms, laboratories, hallways, parking areas, public spaces, and event venues.</li>
+                  <li>Know exits, evacuation routes, shelter areas, lockdown procedures, and emergency contact channels.</li>
+                  <li>Report suspicious behavior, unattended bags, unusual packages, threats, or security concerns to authorities immediately.</li>
+                  <li>Do not touch, move, open, or inspect suspicious objects.</li>
+                  <li>Keep your phone charged and know how to send your location during emergencies.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>During a Terrorist Attack</h3>
+                <ul>
+                  <li>If escape is safe, run away from the threat and move toward a secure location.</li>
+                  <li>Leave belongings behind. Help others only when doing so does not place you in greater danger.</li>
+                  <li>If escape is not possible, hide in a secure area, lock or barricade doors, silence devices, stay low, and remain quiet.</li>
+                  <li>Keep away from windows, open spaces, and visible lines of sight.</li>
+                  <li>If there is an explosion, drop to the ground, protect your head and neck, and move away from secondary hazards when safe.</li>
+                  <li>If exposed to smoke, dust, or chemical irritants, cover your nose and mouth with available cloth and move away from the affected area if possible.</li>
+                  <li>As a last resort and only when your life is in immediate danger, fight using decisive action to disrupt the attacker and create an opportunity to escape.</li>
+                </ul>
+              </div>
+
+              <div class="procedure-box">
+                <h3>After a Terrorist Attack</h3>
+                <ul>
+                  <li>Keep your hands visible when approaching or being approached by responding officers.</li>
+                  <li>Follow commands from law enforcement and emergency responders immediately.</li>
+                  <li>Do not make sudden movements, point, shout unnecessarily, or hold objects that may be mistaken for weapons.</li>
+                  <li>Move away from the danger area and avoid crowds where secondary threats may occur.</li>
+                  <li>Report injuries, attacker description, suspicious objects, possible explosives, fire, smoke, or trapped persons.</li>
+                  <li>Do not spread unverified information. Wait for official instructions before leaving the assembly or holding area.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="reminder">
+      <h2>Preparation for Crisis</h2>
+      <ul>
+        <li>Always be prepared. Know the emergency plan before an incident occurs.</li>
+        <li>Exercise regularly and maintain physical readiness because evacuation, rescue movement, and emergency response require stamina.</li>
+        <li>Practice calm decision-making under pressure. Panic reduces observation, judgment, and survival action.</li>
+        <li>Memorize key contact numbers and know where to report emergencies.</li>
+        <li>Keep essential items accessible: identification, whistle, flashlight, water, basic first aid, power bank, and medication if needed.</li>
+        <li>For criminology and forensic science students, preserve safety first. Documentation, observation, and evidence awareness come only after immediate life safety is secured.</li>
+        <li>Follow the chain of command, cooperate with authorities, and avoid interfering with emergency operations.</li>
+      </ul>
+      <p class="footer-note">These procedures complement institutional emergency policies and should be adjusted according to official school protocols, local disaster-risk reduction guidance, and instructions from emergency responders.</p>
+    </section>
+  </main>
+
+  <script>
+    const items = document.querySelectorAll('.accordion-item');
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+
+    function openItem(item) {
+      const button = item.querySelector('.accordion-button');
+      const panel = item.querySelector('.accordion-panel');
+      item.classList.add('active');
+      button.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+
+    function closeItem(item) {
+      const button = item.querySelector('.accordion-button');
+      const panel = item.querySelector('.accordion-panel');
+      item.classList.remove('active');
+      button.setAttribute('aria-expanded', 'false');
+      panel.style.maxHeight = null;
+    }
+
+    items.forEach((item) => {
+      const button = item.querySelector('.accordion-button');
+      button.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        items.forEach(closeItem);
+        if (!isOpen) openItem(item);
+      });
+    });
+
+    expandAll.addEventListener('click', () => {
+      items.forEach(openItem);
+    });
+
+    collapseAll.addEventListener('click', () => {
+      items.forEach(closeItem);
+    });
+
+    window.addEventListener('resize', () => {
+      items.forEach((item) => {
+        if (item.classList.contains('active')) {
+          const panel = item.querySelector('.accordion-panel');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

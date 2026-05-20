@@ -1,0 +1,523 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Rules and Learning Culture</title>
+  <style>
+    :root {
+      --bg-1: #140f2d;
+      --bg-2: #312e81;
+      --bg-3: #0f766e;
+      --card: rgba(255, 255, 255, 0.12);
+      --card-strong: rgba(255, 255, 255, 0.2);
+      --text: #f8fafc;
+      --muted: #dbeafe;
+      --accent: #facc15;
+      --accent-2: #38bdf8;
+      --danger: #fb7185;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.35), transparent 34%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.35), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 52%, var(--bg-3));
+      padding: 32px 18px;
+    }
+
+    .page {
+      width: min(980px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 42px 32px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -60px auto auto -60px;
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.24);
+      filter: blur(2px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 230px;
+      height: 230px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.22);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.18);
+      color: #fef9c3;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 760px;
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .control-btn {
+      cursor: pointer;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: #0f172a;
+      background: var(--accent);
+      font-weight: 800;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .control-btn.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .control-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.25);
+    }
+
+    .accordion {
+      display: grid;
+      gap: 14px;
+    }
+
+    .accordion-item {
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .accordion-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      cursor: pointer;
+      border: 0;
+      color: var(--text);
+      background: transparent;
+      padding: 22px 24px;
+      text-align: left;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .accordion-button:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .accordion-button span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #fb7185);
+      color: #111827;
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    .icon {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #0f172a;
+      background: var(--accent-2);
+      font-size: 1.3rem;
+      line-height: 1;
+      transition: transform 0.28s ease, background 0.28s ease;
+    }
+
+    .accordion-item.active .icon {
+      transform: rotate(45deg);
+      background: var(--danger);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.34s ease;
+    }
+
+    .accordion-panel-inner {
+      padding: 0 24px 24px 70px;
+      color: #eef2ff;
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      line-height: 1.8;
+    }
+
+    .note-card {
+      margin-top: 16px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.18), rgba(56, 189, 248, 0.14));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #f8fafc;
+      line-height: 1.75;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .note-title {
+      margin-bottom: 8px;
+      color: #fef08a;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .hero {
+        padding: 32px 20px;
+      }
+
+      .accordion-button {
+        padding: 20px 18px;
+      }
+
+      .accordion-panel-inner {
+        padding: 0 18px 22px 18px;
+      }
+
+      .number {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="label">Classroom Standards</div>
+        <h1>House Rules and Learning Culture</h1>
+        <p class="subtitle">A structured guide for discipline, academic responsibility, safety, fairness, and professional conduct in class.</p>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Accordion controls">
+      <button class="control-btn" id="expandAll">Expand All</button>
+      <button class="control-btn secondary" id="collapseAll">Collapse All</button>
+    </section>
+
+    <section class="accordion" id="rulesAccordion">
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">01</span> Attention Protocol</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Stand at attention when I enter the room. You may also be instructed to stand at attention when a higher-ranking individual arrives. Upon the command “Attention,” immediately stop what you are doing, face forward, remain silent, and listen.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">02</span> Cheating</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Cheating is strictly prohibited. If you are caught cheating, your paper will be confiscated and you will be referred to the disciplinary officer. Side-glancing during assessments is also considered cheating. Depending on the severity of the offense, I may recommend suspension or expulsion.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">03</span> Class Mayor</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">A class mayor will be elected to help maintain order, relay class concerns, and ensure that the classroom is clean before dismissal. The class mayor and deputy will also serve as moderators of the class Facebook page and may help facilitate certain class activities.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">04</span> Deadlines and Extensions</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Extensions will not be granted unless the reason is extremely necessary and formally communicated. Submit all requirements on or before the deadline. Plan ahead and anticipate possible delays or contingencies. Without a valid reason, late submissions will not be accepted.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">05</span> Examinations and Materials</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Bring a black pen, Pentel pen, correction tape, and a calculator, if instructed, during examinations. Borrowing materials during examinations is not allowed. Leaving blanks on the answer sheet, such as the date or questionnaire number, will result in corresponding deductions.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">06</span> Excused Absences</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">All excused absences must be supported by valid documentation and presented during the next class you attend. Acceptable documents include a medical certificate for illness or a copy of a death certificate in the case of an immediate family member’s death. In some cases, absences may also be excused when a student officially represents the school in academic, cultural, or sports events, provided that proper documentation is submitted promptly.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">07</span> Following Instructions</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Read and follow instructions carefully. Stay attentive to both verbal and non-verbal cues from the instructor. Some instructions will be given only once unless a student raises a clarification.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">08</span> General Conduct</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Maintain a clean workspace and dispose of waste properly. Observe safety and emergency procedures, and follow health protocols when applicable. Practice respectful communication, discipline, and teamwork. If you leave trash in the room, you will be required to stay after class during future sessions to clean the room. Even if the trash was left by the previous class, it remains your responsibility to help clean the area.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">09</span> Gifting Policy</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Students are not allowed to give material gifts to the teacher. Professional boundaries must be observed at all times. This is part of showing respect for your teachers. Giving gifts may create the impression that a teacher can be easily influenced or bribed.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">10</span> Grades</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">You may visit during consultation hours to inquire about your grades. Requests for grade rectification will only be entertained before the final examination. Bring supporting proof such as returned outputs, quizzes, laboratory work, or other relevant records. Missing major requirements will result in an INC grade. Even if you pass the course, failure to submit major requirements will keep your grade as INC until the deficiency is resolved in accordance with institutional policy. Focus on learning, not merely on grades. Engage with concepts, ask meaningful questions, and strive for mastery.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">11</span> Group Work</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">List your group members alphabetically unless instructed otherwise. Collaboration is a shared responsibility. Participate actively, fairly, and responsibly. Both group performance and individual contribution will be evaluated. Do not include the name of a group member whom you believe did not contribute significantly, but before doing so, make sure you have exhausted all efforts to contact that group member regarding his or her assigned part. Non-compliance will be met with reprimand, and a student may be recommended for dropping if he or she refuses to cooperate with the group.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">12</span> Independent Study</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">No spoon-feeding. Supplement lectures with your own reading, research, and review. Take the initiative to explore references and deepen your understanding of the lesson. This course follows a learner-centered approach, and some questions in the assessments may cover material not discussed explicitly in class. That is part of your supplemental study. This is college, and we are living in the modern era.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">13</span> Laboratory Rules</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Horseplay is strictly prohibited. Handle instruments, equipment, and materials with care. Speak quietly and work responsibly. Always bring the required protective equipment and follow laboratory instructions diligently. Safety is a priority, so report hazards, accidents, or unsafe conditions immediately. Before leaving, arrange all materials and equipment safely and properly.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">14</span> Lecture Procedures</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Expect a short assessment every meeting. Bring your recitation card, a 0.25 sheet of A4 paper, and a black pen every session. Participate actively.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">15</span> Missed Lessons and Completion Window</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">It is the student’s responsibility to obtain missed lessons, instructions, and announcements from classmates. For missed assessments, the completion period expires after the next session you attend. Complete all requirements promptly.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">16</span> Silence</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Maintain silence during class. Refrain from talking to classmates unless instructed to do so. Communicate primarily with the instructor. Move quietly and avoid unnecessary distractions. If you become a class distraction, you may be asked to leave, and an explanation letter signed by you, your parents, and the SDWO officers will be required before you are allowed to return to class.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">17</span> Standards and Formats</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Follow the required format for all submissions. Unless otherwise instructed, write your name in Last, First, MI format and the date in ISO 8601 format. Use A4 paper for all document submissions, with 2.54 cm margins on all sides except the left margin, which should be 3.81 cm. Use Courier New, 12-point font, black, and single-spaced text. This format will serve as the standard unless new instructions are given.</div>
+        </div>
+      </article>
+
+      <article class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          <span><span class="number">18</span> Use of Devices</span>
+          <span class="icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">Photographing, audio recording, or video recording during class is not allowed unless expressly instructed. Even if you are asked to bring devices, you may not use them unless explicitly permitted to do so. Keep all devices on silent mode. Smartphones may be used only for emergencies or for verified course-related searches. You may verify class information online only when appropriate and authorized.</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="note-card">
+      <div class="note-title">Note</div>
+      <p>These rules complement institutional policies and may be updated when necessary to maintain clarity, order, and safety.</p>
+    </section>
+  </main>
+
+  <script>
+    const items = document.querySelectorAll('.accordion-item');
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+
+    function openItem(item) {
+      const button = item.querySelector('.accordion-button');
+      const panel = item.querySelector('.accordion-panel');
+      item.classList.add('active');
+      button.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+
+    function closeItem(item) {
+      const button = item.querySelector('.accordion-button');
+      const panel = item.querySelector('.accordion-panel');
+      item.classList.remove('active');
+      button.setAttribute('aria-expanded', 'false');
+      panel.style.maxHeight = null;
+    }
+
+    items.forEach((item) => {
+      const button = item.querySelector('.accordion-button');
+      button.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        items.forEach(closeItem);
+        if (!isOpen) openItem(item);
+      });
+    });
+
+    expandAll.addEventListener('click', () => {
+      items.forEach(openItem);
+    });
+
+    collapseAll.addEventListener('click', () => {
+      items.forEach(closeItem);
+    });
+
+    window.addEventListener('resize', () => {
+      items.forEach((item) => {
+        if (item.classList.contains('active')) {
+          const panel = item.querySelector('.accordion-panel');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

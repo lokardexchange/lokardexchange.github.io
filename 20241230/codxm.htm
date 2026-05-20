@@ -1,0 +1,607 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dx Mercado</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --text: #f8fafc;
+      --muted: #dbeafe;
+      --cyan: #22d3ee;
+      --blue: #3b82f6;
+      --violet: #8b5cf6;
+      --magenta: #ec4899;
+      --orange: #f97316;
+      --yellow: #facc15;
+      --green: #22c55e;
+      --glass: rgba(255, 255, 255, 0.12);
+      --glass-strong: rgba(255, 255, 255, 0.2);
+      --line: rgba(255, 255, 255, 0.18);
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.35), transparent 26%),
+        radial-gradient(circle at 92% 12%, rgba(236, 72, 153, 0.32), transparent 30%),
+        radial-gradient(circle at 50% 95%, rgba(250, 204, 21, 0.2), transparent 36%),
+        linear-gradient(135deg, #020617 0%, #111827 42%, #230b35 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 88%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0 38%, rgba(34, 211, 238, 0.08) 39% 41%, transparent 42% 100%),
+        linear-gradient(65deg, transparent 0 52%, rgba(250, 204, 21, 0.08) 53% 55%, transparent 56% 100%);
+      z-index: 0;
+    }
+
+    .orb {
+      position: fixed;
+      width: 330px;
+      height: 330px;
+      border-radius: 999px;
+      filter: blur(30px);
+      opacity: 0.34;
+      pointer-events: none;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one { left: -120px; top: 170px; background: var(--cyan); }
+    .orb.two { right: -130px; top: 460px; background: var(--magenta); animation-delay: 2s; }
+    .orb.three { left: 42%; bottom: -180px; background: var(--yellow); animation-delay: 4s; }
+
+    @keyframes float {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(34px, -28px, 0) scale(1.12); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.065));
+      backdrop-filter: blur(22px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      min-height: 520px;
+      display: flex;
+      align-items: end;
+      padding: clamp(34px, 6vw, 72px);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(130deg, rgba(2,6,23,0.3), rgba(2,6,23,0.76)),
+        radial-gradient(circle at 26% 22%, rgba(34,211,238,0.55), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(236,72,153,0.46), transparent 25%),
+        radial-gradient(circle at 55% 88%, rgba(250,204,21,0.38), transparent 32%),
+        linear-gradient(135deg, #0f172a, #312e81 45%, #831843);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.48) 1px, transparent 1.5px),
+        linear-gradient(110deg, transparent 0 35%, rgba(255,255,255,0.18) 36% 38%, transparent 39% 100%);
+      background-size: 30px 30px, 100% 100%;
+      mix-blend-mode: screen;
+      opacity: 0.74;
+    }
+
+    .hero h1 {
+      font-size: clamp(4.4rem, 16vw, 10rem);
+      line-height: 0.86;
+      letter-spacing: -0.08em;
+      text-transform: none;
+      max-width: 900px;
+      text-shadow: 0 20px 70px rgba(0,0,0,0.55);
+      background: linear-gradient(90deg, #ffffff, var(--cyan), var(--yellow), #ffffff);
+      background-size: 260% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 6s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 260% center; }
+    }
+
+    .identity {
+      padding: clamp(28px, 5vw, 54px);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(34,211,238,0.25), transparent 30%),
+        radial-gradient(circle at 88% 22%, rgba(250,204,21,0.18), transparent 28%),
+        linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+    }
+
+    .identity h2 {
+      font-size: clamp(1.8rem, 5vw, 3.8rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+      margin-bottom: 18px;
+    }
+
+    .identity p {
+      color: var(--muted);
+      font-size: clamp(1.04rem, 2vw, 1.28rem);
+      line-height: 1.7;
+      font-weight: 650;
+      white-space: pre-line;
+    }
+
+    .accordion {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.055));
+      backdrop-filter: blur(22px);
+      box-shadow: var(--shadow);
+    }
+
+    .accordion-button {
+      width: 100%;
+      border: 0;
+      cursor: pointer;
+      color: #ffffff;
+      padding: clamp(22px, 4vw, 34px);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      background:
+        linear-gradient(90deg, rgba(34,211,238,0.22), rgba(236,72,153,0.18), rgba(250,204,21,0.13)),
+        rgba(2, 6, 23, 0.46);
+      font: inherit;
+    }
+
+    .accordion-button h2 {
+      font-size: clamp(1.65rem, 4.5vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    .plus {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.14);
+      font-size: 1.7rem;
+      font-weight: 800;
+      transition: transform 0.28s ease;
+    }
+
+    .accordion.open .plus {
+      transform: rotate(45deg);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.36s ease;
+    }
+
+    .accordion-inner {
+      padding: clamp(22px, 4vw, 36px);
+      position: relative;
+    }
+
+    .accordion-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.14;
+      background:
+        radial-gradient(circle at 12% 20%, var(--cyan), transparent 25%),
+        radial-gradient(circle at 86% 30%, var(--orange), transparent 28%);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+    }
+
+    .content p {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .content ul {
+      display: grid;
+      gap: 11px;
+      list-style: none;
+    }
+
+    .content li {
+      position: relative;
+      padding: 14px 16px 14px 42px;
+      border-radius: 17px;
+      color: #f8fafc;
+      font-size: clamp(1rem, 1.65vw, 1.13rem);
+      line-height: 1.45;
+      background: rgba(255,255,255,0.085);
+      border: 1px solid rgba(255,255,255,0.105);
+    }
+
+    .content li::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 20px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--yellow), var(--magenta));
+      box-shadow: 0 0 18px rgba(34,211,238,0.66);
+    }
+
+    .contact {
+      padding: clamp(34px, 6vw, 66px);
+      background:
+        radial-gradient(circle at 16% 20%, rgba(34,211,238,0.35), transparent 32%),
+        radial-gradient(circle at 82% 18%, rgba(236,72,153,0.28), transparent 28%),
+        radial-gradient(circle at 55% 88%, rgba(250,204,21,0.2), transparent 34%),
+        linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.055));
+    }
+
+    .contact h2 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      margin-bottom: 24px;
+      background: linear-gradient(90deg, #ffffff, var(--cyan), var(--yellow), #ffffff);
+      background-size: 240% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 6s linear infinite;
+    }
+
+    .contact p,
+    .contact a {
+      display: block;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: clamp(1.08rem, 2vw, 1.45rem);
+      font-weight: 800;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .contact a:hover {
+      color: var(--yellow);
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 20px, 980px);
+        padding-top: 18px;
+      }
+
+      .section,
+      .accordion {
+        border-radius: 22px;
+      }
+
+      .hero {
+        min-height: 430px;
+      }
+
+      .plus {
+        width: 34px;
+        height: 34px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <main class="page">
+    <section class="section hero">
+      <h1>Dx Mercado</h1>
+    </section>
+
+    <section class="section identity">
+      <h2>Doel Salvador R. Mercado</h2>
+      <p>
+Assistant Professor
+Department of Forensic Science
+College of Criminal Justice Education
+University of the Cordilleras
+      </p>
+    </section>
+
+    <section class="accordion open">
+      <button class="accordion-button" type="button">
+        <h2>PROFILE</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>I am an Assistant Professor in Forensic Science at the University of the Cordilleras since January 2024.</p>
+            <p>My academic and professional work is grounded in forensic science, with particular emphasis on computer-based investigations, mathematics, physics, and technology-assisted criminal justice education. I am also the current CCD and LMS coordinator of CAS, CCJE and CTE.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>RELATED EDUCATION</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Bachelor of Forensic Science
+Class of 2022</p>
+            <p>Master of Science in Criminal Justice
+Class of 2024</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>EDUCATION AND TRAINING</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Philippine Science High School
+Electronics and Industrial Chemistry</p>
+            <p>Cisco Networking Academy
+CCNA IV, expired</p>
+            <p>University of the Philippines
+125 BS Civil Engineering Units</p>
+            <p>Informatics
+Adobe Studio Program</p>
+            <p>Camp Macario Sakay
+Reserve Officers’ Service Training Corps</p>
+            <p>Camp Riego de Dios
+Limited Warfighting Competency</p>
+            <p>Bachelor of Forensic Science
+Second Batch, 1 of 7 Graduates</p>
+            <p>Master of Science in Criminal Justice
+Cum Laude</p>
+            <p>Philippine Criminalistics Society, Inc.
+Rank 1, 20th National Forensic Science Specialization Training</p>
+            <p>Trivia: I finished all NSTP Courses</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>COURSES HANDLED</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Crime Scene Reconstruction</p>
+            <p>Fire Technology and Explosives</p>
+            <p>Digital Forensics I and II</p>
+            <p>Forensic Chemistry</p>
+            <p>Human Rights Education</p>
+            <p>Introduction to the Philippine Criminal Justice System</p>
+            <p>IT Application Tools in Criminal Justice and Public Safety</p>
+            <p>Lie Detection and Polygraphy</p>
+            <p>Post-Blast Investigation</p>
+            <p>Trace Evidence</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>OTHER AREAS</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Volunteer</p>
+            <p>Visual Artist</p>
+            <p>Gamer</p>
+            <p>Filmmaker</p>
+            <p>Athlete</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>as VOLUNTEER</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Philippine Army Reservist</p>
+            <p>Regular Red Cross Blood Donor</p>
+            <p>UP Ugnayan ng Pahinungod Volunteer</p>
+            <p>Trivia: Blood Galloner Awardee</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>as VISUAL ARTIST</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Participated in 50 group art exhibitions</p>
+            <p>Finalist, Metrobank Art and Design Excellence</p>
+            <p>Exhibited at the Cultural Center of the Philippines</p>
+            <p>Exhibited in Busan, South Korea</p>
+            <p>Member, Art Association of the Philippines</p>
+            <p>Member, Makisining</p>
+            <p>Member, UP Painters’ Club</p>
+            <p>Trivia: Participant, Guinness World Record attempt for the longest painting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>as GAMER</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Counter-Strike</p>
+            <p>Dota 2</p>
+            <p>Left 4 Dead</p>
+            <p>Trivia: In Dota 2, I have 17 trophies in Southeast Asia Battle Cup</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>as FILMMAKER</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Actor</p>
+            <p>Director</p>
+            <p>Writer</p>
+            <p>Trivia: I co-acted with Wathafenvela as a goon</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="accordion">
+      <button class="accordion-button" type="button">
+        <h2>as ATHLETE</h2>
+        <span class="plus">+</span>
+      </button>
+      <div class="accordion-panel">
+        <div class="accordion-inner">
+          <div class="content">
+            <p>Track and Field Athlete</p>
+            <p>Football Midfielder</p>
+            <p>Sepak Takraw Spiker</p>
+            <p>Trivia: I am an undefeated in the CCJE Intracollegiate Tournament</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact">
+      <h2>Dx Mercado</h2>
+      <a href="https://www.dxmercado.com" target="_blank" rel="noreferrer">www.dxmercado.com</a>
+      <a href="mailto:drmercado@up.edu.ph">drmercado@up.edu.ph</a>
+      <a href="tel:+639954364291">0995 436 4291</a>
+    </section>
+  </main>
+
+  <script>
+    const accordions = document.querySelectorAll('.accordion');
+
+    function updatePanel(accordion) {
+      const panel = accordion.querySelector('.accordion-panel');
+      if (!panel) return;
+      panel.style.maxHeight = accordion.classList.contains('open') ? panel.scrollHeight + 'px' : '0px';
+    }
+
+    accordions.forEach((accordion) => {
+      const button = accordion.querySelector('.accordion-button');
+      updatePanel(accordion);
+      button.addEventListener('click', () => {
+        accordion.classList.toggle('open');
+        updatePanel(accordion);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      accordions.forEach(updatePanel);
+    });
+  </script>
+</body>
+</html>
